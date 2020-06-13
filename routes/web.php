@@ -14,8 +14,6 @@ Auth::routes([
   'verify' => false
 ]);
 
-
-
 // маршруты используемые после авторизации администратора
 Route::get('logout', 'Auth\LoginController@logout')->name('get-logout');
 
