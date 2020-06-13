@@ -2,11 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-
-
-Route::group(['prefix' => 'administrator'], function () {
-});
-
 Auth::routes([
   'reset' => false,
   'confirm' => false,
@@ -19,9 +14,11 @@ Route::get('logout', 'Auth\LoginController@logout')->name('get-logout');
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/panel', 'AdminController@Index')->name('admin-panel');
+
     Route::group(['prefix' => 'panel'], function () {
       Route::post('/confirm-client-request', 'AdminController@ComfirmClient')->name('comfirm-client');
       Route::post('/delete-client-request', 'AdminController@DeleteRequestClient')->name('delete-client');
+      Route::post('/add-client-request', 'AdminController@AddNewClient')->name('add-client');
     });
 
 });

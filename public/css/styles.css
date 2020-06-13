@@ -975,6 +975,38 @@ a:focus, a:active, a:visited {
   margin-right: 2rem;
 }
 
+#formContainer{
+  padding: 1rem;
+  margin-top: 0.5rem;
+  border-radius: 0.4rem;
+  width: 35%;
+}
+
+#datepicker-panel input{
+  font-size: 1rem;
+  max-width: 15rem;
+  font-family: 'Gabriela', serif;
+  height: 2rem;
+  background-color: #DDD;
+  border-radius: 0.4rem;
+  border: 0.1rem solid #edf5e1 !important;
+  margin-bottom: 0.5rem;
+}
+
+.select-div{
+  margin-bottom: 1rem !important;
+}
+
+#datepicker-panel span{
+  margin-left: 0.3rem;
+  margin-right: 0.3rem;
+}
+.panel-button-add{
+  margin-top: 0.8rem;
+  margin-right: 2rem;
+}
+
+
 
 /* все что касается оформления для футера */
 footer{

@@ -1,8 +1,10 @@
-
-
 $(document).ready(function () {
   $('#dtBasicUsers').DataTable();
   $('.dataTables_length').addClass('bs-select');
+  $("#masked-phone-text1").mask("8(999) 999-99-99");
+  $('#open-form-button').show();
+  $('#AddForm').hide();
+  $('#save-button-form').hide();
 });
 
 $.ajaxSetup({
@@ -43,9 +45,80 @@ function DClientRequest(d, i){
       alert(data.success);
       i = '#' + i;
       $(i).remove();
+      document.location.reload(true);
     },
     error: function (data) {
       alert(data.error);
     }
   });
+}
+// передает данные с таблицы на форму
+function ChangeRecordId (object){
+  $( '#open-form-button' ).hide();
+  $( '#add-button-form' ).hide();
+  $( '#save-button-form' ).show();
+  $( '#AddForm' ).show();
+  // console.log(JSON.stringify(object));
+  $( '#arrival-date' ).val(object.arrival_date);
+  $( '#departure-date' ).val(object.departure_date);
+  $( '#option-type-room' ).children("option:selected").val(object.type_room);
+  $( '#count-persons' ).val(object.count_persons);
+  $( '#username-form' ).val(object.username);
+  $( '#email-form' ).val(object.email);
+  $( '#masked-phone-text1' ).val(object.phone);
+}
+
+// добавляет нового клиента
+function AddNewClient(){
+  var array = {};
+  array['arrival'] = $( '#arrival-date' ).val();
+  array['depart'] = $( '#departure-date' ).val();
+  array['type'] = $( '#option-type-room' ).children("option:selected").val();
+  array['count'] = $( '#count-persons' ).val();
+  array['username'] = $( '#username-form' ).val();
+  array['email'] = $( '#email-form' ).val();
+  array['phone'] = $( '#masked-phone-text1' ).val();
+
+  $.ajax({
+    url: 'panel/add-client-request',
+    data: array,
+    type: 'POST',
+    dataType: 'json',
+
+    success: function (response) {
+      alert(response.success);
+      document.location.reload(true);
+      $( '#arrival-date' ).val("");
+      $( '#departure-date' ).val("");
+      $( '#option-type-room' ).children("option:selected").val("");
+      $( '#count-persons' ).val("");
+      $( '#username-form' ).val("");
+      $( '#email-form' ).val("");
+      $( '#masked-phone-text1' ).val("");
+    },
+    error: function (response) {
+      alert(response.error);
+    }
+  });
+}
+
+// открывает форму для добавления нового клиента
+$('#open-form-button').click(function(){
+  $('#open-form-button').hide();
+  $( "#AddForm" ).show();
+  $( '#add-button-form' ).show();
+  $( '#save-button-form' ).hide();
+  $( '#arrival-date' ).val("");
+  $( '#departure-date' ).val("");
+  $( '#option-type-room' ).val("");
+  $( '#count-persons' ).val("");
+  $( '#username-form' ).val("");
+  $( '#email-form' ).val("");
+  $( '#masked-phone-text1' ).val("");
+});
+
+
+function CloseAddForm(){
+  $('#open-form-button').show();
+  $("#AddForm").hide();
 }

@@ -5,7 +5,7 @@
 <section class="reserv-section">
   <h2 class="reserv-title">Бронирование в гостевом доме</h2>
   @if($errors->any())
-  <div class="alert alert-danger">
+  <div class="alert alert-danger" id="alert-message" style="margin-left: 2rem; margin-right: 2rem;">
     <ul>
       @foreach($errors->all() as $error)
       <li>{{ $error }}</li>
@@ -39,7 +39,7 @@
               <div class="col-xl-6 col-lg-5 col-md-7 col-sm-10 col-10 d-flex justify-content-center">
                 <div class="col-auto my-1">
                   <select class="custom-select mr-sm-2" id="inlineRoomSelect" name="type-room" required="">
-                    <option selected>Выберите номер</option>
+                    <option value="" selected>Выберите номер</option>
                     <option value="1">Первый</option>
                     <option value="2">Второй</option>
                     <option value="3">Третий</option>
