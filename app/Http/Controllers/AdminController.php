@@ -36,7 +36,8 @@ class AdminController extends Controller
 
         $uuid = $req->input('uuid');
         try {
-            DB::table('records')->where('uuid', $uuid)->delete();
+            Record::where('uuid', $uuid)->delete();
+            // DB::table('records')->where('uuid', $uuid)->delete();
         } catch (Exception $e) {
             return response()->json(['error'=> $e->getMessage() ]);
         }
@@ -56,11 +57,32 @@ class AdminController extends Controller
             $record->username = $req->input('username');
             $record->phone = $req->input('phone');
             $record->uuid = Str::uuid();
-            $record->confirmed = 1;
+            $record->confirmed = $req->input('confirmed');
+
             $record->save();
         } catch (Exception $e) {
             return response()->json([ 'error'=> $e->getMessage() ]);
         }
         return response()->json([ 'success'=>'Запись была успешно добавлена.' ]);
+    }
+
+    protected function ChangeDataClient(Request $req){
+        try {
+            Record::where('uuid', $req->input('uuid'))->update(
+              [
+                'arrival_date' => $req->input('arrival'),
+                'departure_date' => $req->input('depart'),
+                'email' => $req->input('email'),
+                'count_persons' => $req->input('count'),
+                'type_room' => $req->input('type'),
+                'username' => $req->input('username'),
+                'phone' => $req->input('phone'),
+                'confirmed' => $req->input('confirmed')
+              ]);
+              
+        } catch (Exception $e) {
+            return response()->json([ 'error'=> $e->getMessage() ]);
+        }
+        return response()->json([ 'success'=>'Запись была успешно Обновлена.' ]);
     }
 }

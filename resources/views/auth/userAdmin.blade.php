@@ -52,7 +52,10 @@
       </tbody>
 
   </table>
-  <button id="open-form-button" class="btn btn-primary user-button" type="button" name="button">Добавить бронивароние</button>
+  <div class="d-flex justify-content-center">
+    <button id="open-form-button" class="btn btn-primary user-button" type="button" name="button">Добавить бронивароние</button>
+    <button id="open-price-button" class="btn btn-primary user-button" type="button" name="button">Цены и описание</button>
+  </div>
 
   <div id="formContainer" class="d-flex justify-content-center" >
     <form id="AddForm" action="" method="POST">
@@ -75,10 +78,14 @@
       <input id="username-form" type="text" required="" name="add-username" value="" class="form-control input-style-form input1" placeholder="Ф И О">
       <input id="email-form" type="text" required="" name="add-email" value="" class="form-control input-style-form input1" placeholder="Электронная почта">
       <input id="masked-phone-text1" type="text" required="" name="add-phone" value="" class="form-control input-style-form input1" placeholder="Номер телефона">
+      <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="check-settle">
+        <label class="form-check-label" for="check-settle">Подтвердить заселение</label>
+      </div>
 
       <div class="container container-fluid d-flex justify-content-center">
         <button id="add-button-form" class="btn btn-form btn-outline-light btn-primary panel-button-add" type="sumbit" onclick="AddNewClient()">Добавить</button>
-        <button id="save-button-form" class="btn btn-form btn-outline-light btn-primary panel-button-add" type="button" onclick="SaveChangeClient();">Сохранить</button>
+        <button id="save-button-form" class="btn btn-form btn-outline-light btn-primary panel-button-add" type="button" onclick='SaveChangeClient("{{  $record->uuid }}");'>Сохранить</button>
         <button class="btn btn-form btn-outline-light btn-warning panel-button-add" type="button" onclick="CloseAddForm();">Закрыть</button>
     </div>
     </form>

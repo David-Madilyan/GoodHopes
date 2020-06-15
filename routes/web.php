@@ -19,6 +19,7 @@ Route::group(['middleware' => 'auth'], function() {
       Route::post('/confirm-client-request', 'AdminController@ComfirmClient')->name('comfirm-client');
       Route::post('/delete-client-request', 'AdminController@DeleteRequestClient')->name('delete-client');
       Route::post('/add-client-request', 'AdminController@AddNewClient')->name('add-client');
+      Route::post('/change-client-request', 'AdminController@ChangeDataClient')->name('change-client');
     });
 
 });

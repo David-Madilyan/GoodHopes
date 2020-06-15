@@ -1006,6 +1006,11 @@ a:focus, a:active, a:visited {
   margin-right: 2rem;
 }
 
+.form-check{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-family: 'Gabriela', serif;
+}
 
 
 /* все что касается оформления для футера */

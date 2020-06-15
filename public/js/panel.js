@@ -13,6 +13,7 @@ $.ajaxSetup({
     }
 });
 
+// подтверждение статуса заявки
 function ConfirmedClient(u){
   var d = {};
 		d['uuid'] = u;
@@ -33,6 +34,7 @@ function ConfirmedClient(u){
   });
 }
 
+// удаление заявки на заселение
 function DClientRequest(d, i){
   var u = {};
   u['uuid'] = d;
@@ -48,16 +50,25 @@ function DClientRequest(d, i){
       document.location.reload(true);
     },
     error: function (data) {
-      alert(data.error);
+      alert(data.error + + '. Запрос не был выполнен!');
     }
   });
 }
-// передает данные с таблицы на форму
+
+// передает данные с таблицы на форму, форма для изменения данных о заявки бронирования номера
 function ChangeRecordId (object){
   $( '#open-form-button' ).hide();
   $( '#add-button-form' ).hide();
   $( '#save-button-form' ).show();
+  $( '.form-check' ).show();
   $( '#AddForm' ).show();
+
+  if(object.confirmed == 0){
+    $("#check-settle").prop( "checked", false );
+  }else{
+    $("#check-settle").prop( "checked", true );
+  }
+
   // console.log(JSON.stringify(object));
   $( '#arrival-date' ).val(object.arrival_date);
   $( '#departure-date' ).val(object.departure_date);
@@ -70,14 +81,7 @@ function ChangeRecordId (object){
 
 // добавляет нового клиента
 function AddNewClient(){
-  var array = {};
-  array['arrival'] = $( '#arrival-date' ).val();
-  array['depart'] = $( '#departure-date' ).val();
-  array['type'] = $( '#option-type-room' ).children("option:selected").val();
-  array['count'] = $( '#count-persons' ).val();
-  array['username'] = $( '#username-form' ).val();
-  array['email'] = $( '#email-form' ).val();
-  array['phone'] = $( '#masked-phone-text1' ).val();
+  var array = GetAllInputForm();
 
   $.ajax({
     url: 'panel/add-client-request',
@@ -97,7 +101,26 @@ function AddNewClient(){
       $( '#masked-phone-text1' ).val("");
     },
     error: function (response) {
-      alert(response.error);
+      alert(response.error + '. Запрос не был выполнен!');
+    }
+  });
+}
+
+function SaveChangeClient(s){
+  var array = GetAllInputForm();
+  array['uuid'] = s;
+  $.ajax({
+    url: 'panel/change-client-request',
+    data: array,
+    type: 'POST',
+    dataType: 'json',
+
+    success: function (response) {
+      alert(response.success);
+      document.location.reload(true);
+    },
+    error: function (response) {
+      alert(response.error + '. Запрос не был выполнен!');
     }
   });
 }
@@ -108,6 +131,7 @@ $('#open-form-button').click(function(){
   $( "#AddForm" ).show();
   $( '#add-button-form' ).show();
   $( '#save-button-form' ).hide();
+  $( '#check-settle' ).prop( "checked", false );
   $( '#arrival-date' ).val("");
   $( '#departure-date' ).val("");
   $( '#option-type-room' ).val("");
@@ -121,4 +145,22 @@ $('#open-form-button').click(function(){
 function CloseAddForm(){
   $('#open-form-button').show();
   $("#AddForm").hide();
+}
+
+
+function GetAllInputForm(){
+  var array = {};
+  array['arrival'] = $( '#arrival-date' ).val();
+  array['depart'] = $( '#departure-date' ).val();
+  array['type'] = $( '#option-type-room' ).children("option:selected").val();
+  array['count'] = $( '#count-persons' ).val();
+  array['username'] = $( '#username-form' ).val();
+  array['email'] = $( '#email-form' ).val();
+  array['phone'] = $( '#masked-phone-text1' ).val();
+  if( $("#check-settle").prop('checked') ){
+    array['confirmed'] = 1;
+  }else{
+    array['confirmed'] = 0;
+  }
+  return array;
 }
