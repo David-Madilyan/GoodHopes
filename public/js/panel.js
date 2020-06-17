@@ -5,8 +5,10 @@ $(document).ready(function () {
   $('#open-form-button').show();
   $('#AddForm').hide();
   $('#save-button-form').hide();
+  $('#price-room-form').hide();
+  $('#price-one-day').attr('type', 'number');
 });
-
+var uuid = "";
 $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -62,7 +64,7 @@ function ChangeRecordId (object){
   $( '#save-button-form' ).show();
   $( '.form-check' ).show();
   $( '#AddForm' ).show();
-
+  $( '#price-one-day' ).show();
   if(object.confirmed == 0){
     $("#check-settle").prop( "checked", false );
   }else{
@@ -70,6 +72,7 @@ function ChangeRecordId (object){
   }
 
   // console.log(JSON.stringify(object));
+  uuid = object.uuid;
   $( '#arrival-date' ).val(object.arrival_date);
   $( '#departure-date' ).val(object.departure_date);
   $( '#option-type-room' ).children("option:selected").val(object.type_room);
@@ -77,12 +80,17 @@ function ChangeRecordId (object){
   $( '#username-form' ).val(object.username);
   $( '#email-form' ).val(object.email);
   $( '#masked-phone-text1' ).val(object.phone);
+  if(object.price > 0){
+    $( '#price-one-day' ).val(object.price);
+  }else{
+    $( '#price-one-day' ).val('');
+  }
 }
 
 // добавляет нового клиента
 function AddNewClient(){
   var array = GetAllInputForm();
-
+  array['daysLag'] = GetDaysLag(array);
   $.ajax({
     url: 'panel/add-client-request',
     data: array,
@@ -101,14 +109,17 @@ function AddNewClient(){
       $( '#masked-phone-text1' ).val("");
     },
     error: function (response) {
-      alert(response.error + '. Запрос не был выполнен!');
+      // alert(response.error + '. Запрос не был выполнен!');
     }
   });
 }
 
-function SaveChangeClient(s){
+// сохраняет данные об измениях на сервере
+function SaveChangeClient(){
   var array = GetAllInputForm();
-  array['uuid'] = s;
+  array['uuid'] = uuid;
+  array['price'] = parseInt($( '#price-one-day' ).val());
+  // array['price'] = GetPrice(array);
   $.ajax({
     url: 'panel/change-client-request',
     data: array,
@@ -118,11 +129,19 @@ function SaveChangeClient(s){
     success: function (response) {
       alert(response.success);
       document.location.reload(true);
+      uuid = "";
     },
     error: function (response) {
       alert(response.error + '. Запрос не был выполнен!');
     }
   });
+}
+
+function GetDaysLag(a){
+  var date1 = new Date(a['arrival']);
+  var date2 = new Date(a['depart']);
+  var daysLag = Math.ceil(Math.abs(date2.getTime() - date1.getTime()) / (1000 * 3600 * 24));
+  return daysLag;
 }
 
 // открывает форму для добавления нового клиента
@@ -131,6 +150,7 @@ $('#open-form-button').click(function(){
   $( "#AddForm" ).show();
   $( '#add-button-form' ).show();
   $( '#save-button-form' ).hide();
+  $( '#price-one-day' ).hide();
   $( '#check-settle' ).prop( "checked", false );
   $( '#arrival-date' ).val("");
   $( '#departure-date' ).val("");
@@ -141,11 +161,11 @@ $('#open-form-button').click(function(){
   $( '#masked-phone-text1' ).val("");
 });
 
+$('#open-price-button').click(function(){
+  $( '#price-room-form' ).show();
+  $( '#open-price-button' ).hide();
 
-function CloseAddForm(){
-  $('#open-form-button').show();
-  $("#AddForm").hide();
-}
+});
 
 
 function GetAllInputForm(){
@@ -163,4 +183,15 @@ function GetAllInputForm(){
     array['confirmed'] = 0;
   }
   return array;
+}
+
+function CloseAddForm(){
+  $('#open-form-button').show();
+  $("#AddForm").hide();
+}
+
+function ClosePriceTable(){
+
+  $("#price-room-form").hide();
+  $("#open-price-button").show();
 }

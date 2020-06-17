@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Record;
+use App\Models\Price;
 use Illuminate\Support\Str;
 
 class AdminController extends Controller
@@ -12,7 +13,8 @@ class AdminController extends Controller
     // get all records from db
     protected function Index(){
         $records = DB::table('records')->get();
-        return view('auth.userAdmin', compact('records'));
+        $prices = DB::table('prices')->get();
+        return view('auth.userAdmin', compact('records', 'prices'));
     }
 
     protected function ComfirmClient(Request $req){
@@ -48,6 +50,7 @@ class AdminController extends Controller
 
     protected function AddNewClient ( Request $req ){
         $record = new Record();
+        $days = $req->input('daysLag');
         try {
             $record->arrival_date = $req->input('arrival');
             $record->departure_date = $req->input('depart');
@@ -58,6 +61,9 @@ class AdminController extends Controller
             $record->phone = $req->input('phone');
             $record->uuid = Str::uuid();
             $record->confirmed = $req->input('confirmed');
+
+            $room =  DB::table('prices')->where('room_type', $record->type_room)->first();
+            $record->price = $room->price * $days;
 
             $record->save();
         } catch (Exception $e) {
@@ -76,10 +82,11 @@ class AdminController extends Controller
                 'count_persons' => $req->input('count'),
                 'type_room' => $req->input('type'),
                 'username' => $req->input('username'),
+                'price' => $req->input('price'),
                 'phone' => $req->input('phone'),
                 'confirmed' => $req->input('confirmed')
               ]);
-              
+
         } catch (Exception $e) {
             return response()->json([ 'error'=> $e->getMessage() ]);
         }

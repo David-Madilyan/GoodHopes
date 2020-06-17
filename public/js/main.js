@@ -121,6 +121,7 @@ $('.input-daterange').datepicker({
   multidate: false,
   todayHighlight: true,
   startDate: getCurDate(),
+  format: 'mm/dd/yyyy',
   toggleActive: true
 });
 
