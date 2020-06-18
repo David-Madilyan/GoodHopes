@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Price extends Model
+class Room extends Model
 {
     //
 }

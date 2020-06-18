@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.8/css/all.css">
   <link rel = "icon" href ="assets/img/logo.png" type = "image/x-icon">
   <link rel="stylesheet" href="css/styles.css">
+  <!-- <link href="{{ URL::asset('css/style.css') }}" rel="stylesheet" type="text/css" > -->
   <link rel="stylesheet" href="js/vendor/datepicker/bootstrap-datepicker.min.css">
   <link rel="stylesheet" href="js/vendor/datepicker/bootstrap-datepicker3.min.css">
   <link rel="stylesheet" href="js/vendor/datepicker/bootstrap-datepicker3.standalone.min.css">

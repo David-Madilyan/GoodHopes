@@ -34,9 +34,9 @@
               <td>{{ $record->username }}</td>
               <td>{{ $record->phone }}</td>
               <td>
-                @foreach($prices as $price)
-                  @if($record->type_room ==  $price->room_type)
-                    {{$price->room_name}}
+                @foreach($rooms as $room)
+                  @if($record->type_room ==  $room->type)
+                    {{$room->name}}
                   @endif
                 @endforeach
               </td>
@@ -61,6 +61,7 @@
   <div class="d-flex justify-content-center">
     <button id="open-form-button" class="btn btn-primary user-button" type="button" name="button">Добавить бронивароние</button>
     <button id="open-price-button" class="btn btn-primary user-button" type="button" name="button">Цены и описание</button>
+    <hr>
   </div>
 
 <!-- форма для добавления нового бронирования или изменения уже оформленных броней -->
@@ -78,12 +79,9 @@
       <div class="col-auto my-1 select-div">
         <select id="option-type-room" class="custom-select" name="add-room" required="">
           <option value="">Выберите номер</option>
-          @foreach($prices as $price)
-            <option value="{{ $price->room_type }}">{{ $price->room_name }}</option>
+          @foreach($rooms as $room)
+            <option value="{{ $room->type }}">{{ $room->name }}</option>
           @endforeach
-          <!-- <option value="2">Семейный</option>
-          <option value="3">С видом на море</option>
-          <option value="4">Флеш роял</option> -->
         </select>
       </div>
       <input id="count-persons" type="number" style="text-align: center;" name="count-person" count-person"text-area-count" required="" placeholder="Количество персон" max="10">
@@ -95,7 +93,7 @@
         <input type="checkbox" class="form-check-input" id="check-settle">
         <label class="form-check-label" for="check-settle">Подтвердить заселение</label>
       </div>
-
+      <hr>
       <div class="container container-fluid d-flex justify-content-center">
         <button id="add-button-form" class="btn btn-form btn-outline-light btn-primary panel-button-add" type="sumbit" onclick="AddNewClient()">Добавить</button>
         <button id="save-button-form" class="btn btn-form btn-outline-light btn-primary panel-button-add" type="button" onclick='SaveChangeClient();'>Сохранить</button>
@@ -104,6 +102,7 @@
     </form>
   </div>
 
+<!-- таблица для работы с комнатами и их характеристиками -->
   <div id="price-room-form" class="panel-room-form">
     <hr>
     <table id="table-prices" class="table">
@@ -111,25 +110,26 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Наименование</th>
-          <th scope="col">Цена за сутки</th>
-          <th scope="col">Описание</th>
-          <th scope="col">Тип комнаты</th>
+          <th scope="col panel-col">Цена за сутки</th>
+          <th scope="col">Описание комнаты</th>
+          <th scope="col panel-col">Тип комнаты</th>
         </tr>
       </thead>
       <tbody>
-        @foreach($prices as $price)
+        @foreach($rooms as $room)
           <tr>
             <th scope="row">{{ $loop->index }}</th>
-            <td><input id="item-price-name-{{ $price->id }}" type="text" name="price-room-name" value="{{ $price->room_name }}" class="form-control panel-input-room" placeholder=""></td>
-            <td><input id="item-price-price-{{ $price->id }}" type="text" name="price-room-price" value="{{ $price->price }}" class="form-control panel-input-room" placeholder=""></td>
-            <td><textarea id="item-price-discription-{{ $price->id }}" type="text" name="price-room-discription"  class="form-control panel-input-room" placeholder="">{{ $price->discription }}</textarea></td>
-            <td><input id="item-price-type-{{ $price->id }}" type="text" name="price-room-type" value="{{ $price->room_type }}" class="form-control panel-input-room" placeholder=""></td>
+            <td><input id="item-price-name-{{ $loop->index }}" type="text" name="price-room-name" value="{{ $room->name }}" class="form-control panel-input-room" placeholder=""></td>
+            <td class="panel-col"><input id="item-price-price-{{ $loop->index }}" type="text" name="price-room-price" value="{{ $room->price }}" class="form-control panel-input-room" placeholder=""></td>
+            <td><textarea id="item-price-discription-{{ $loop->index }}" type="text" name="price-room-discription"  class="form-control panel-input-room" placeholder="">{{ $room->description }}</textarea></td>
+            <td class="panel-col"><input id="item-price-type-{{$loop->index }}" type="text" name="price-room-type" value="{{ $room->type }}" class="form-control panel-input-room" placeholder=""></td>
           </tr>
         @endforeach
       </tbody>
     </table>
+    <hr>
     <button id="save-button-price" class="btn btn-form btn-outline-light btn-primary panel-button-add" type="button" onclick='SaveChangePriceRoom();'>Сохранить</button>
-    <button id="save-button-price" class="btn btn-form btn-outline-light btn-warning panel-button-add" type="button" onclick='ClosePriceTable();'>Закрыть</button>
+    <button id="close-button-price" class="btn btn-form btn-outline-light btn-warning panel-button-add" type="button" onclick='ClosePriceTable();'>Закрыть</button>
   </div>
 </section>
 @endsection

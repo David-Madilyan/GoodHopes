@@ -40,10 +40,9 @@
                 <div class="col-auto my-1">
                   <select class="custom-select mr-sm-2" id="inlineRoomSelect" name="type-room" required="">
                     <option value="" selected>Выберите номер</option>
-                    <option value="1">Первый</option>
-                    <option value="2">Второй</option>
-                    <option value="3">Третий</option>
-                    <option value="4">Четвертый</option>
+                    @foreach($rooms as $room)
+                      <option value="{{ $room->type }}">{{ $room->name }}</option>
+                    @endforeach
                   </select>
                 </div>
               </div>

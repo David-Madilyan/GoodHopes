@@ -1034,6 +1034,9 @@ a:focus, a:active, a:visited {
 .panel-title{
   width: 15rem !important;
 }
+.panel-col{
+  width: 10rem;
+}
 
 /* все что касается оформления для футера */
 footer{

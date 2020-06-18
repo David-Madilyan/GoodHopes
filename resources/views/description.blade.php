@@ -9,7 +9,7 @@
     <div class="container margin-top-desc" data-aos="fade-up">
       <div class="section-title">
         <h2 class="description-title-text">Фотографии гостевого дома</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p class="description-title-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
       </div>
       <div class="row" data-aos="fade-up" data-aos-delay="100">
         <div class="col-lg-12 d-flex justify-content-center">
@@ -90,10 +90,12 @@
       </div>
     </div>
 
+    @foreach($rooms as $room)
+    @if($room->type == 1)
     <div class="container" data-aos="fade-up">
       <div class="section-title">
-        <h2 class="description-title-text">Двухместный номер с одной кроватью</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <h2 class="description-title-text">{{ $room->name }}</h2>
+        <p class="description-title-text">{{ $room->description }}</p>
         <div class="row counters d-flex justify-content-center">
           <div class="col-lg-2 col-6 text-center">
               <img src="assets/img/icons/wif.png">
@@ -101,7 +103,7 @@
           </div>
           <div class="col-lg-2 col-6 text-center">
               <img src="assets/img/icons/pri.png">
-            <p class="description-list-price">2500 руб./сутки</p>
+            <p class="description-list-price">{{ $room->price }} руб./сутки</p>
           </div>
           <div class="col-lg-2 col-6 text-center">
               <img src="assets/img/icons/wav.png">
@@ -116,7 +118,7 @@
             <p class="description-list-price">Бесплатная парковка</p>
           </div>
         </div>
-        <a class="btn btn-outline-light description-btn" href="/reservation/type1">Забронировать</a>
+        <a class="btn btn-outline-light description-btn" href="reservation/1">Забронировать</a>
       </div>
       <div class="row" data-aos="fade-up" data-aos-delay="100">
         <div class="col-lg-12 d-flex justify-content-center">
@@ -196,11 +198,12 @@
         </div>
       </div>
     </div>
-
+    @endif
+    @if($room->type == 4)
     <div class="container" data-aos="fade-up">
       <div class="section-title">
-        <h2 id="room2Title" class="description-title-text">Стандартный двухместный номер с одной кроватью</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <h2 id="room2Title" class="description-title-text">{{ $room->name }}</h2>
+        <p class="description-title-text">{{ $room->description }}</p>
         <div class="row counters d-flex justify-content-center">
           <div class="col-lg-2 col-6 text-center">
               <img src="assets/img/icons/wif.png">
@@ -208,7 +211,7 @@
           </div>
           <div class="col-lg-2 col-6 text-center">
               <img src="assets/img/icons/pri.png">
-            <p class="description-list-price">2500 руб./сутки</p>
+            <p class="description-list-price">{{ $room->price }} руб./сутки</p>
           </div>
           <div class="col-lg-2 col-6 text-center">
               <img src="assets/img/icons/wav.png">
@@ -223,7 +226,7 @@
             <p class="description-list-price">Бесплатная парковка</p>
           </div>
         </div>
-        <a class="btn btn-outline-light description-btn" href="/reservation/type2">Забронировать</a>
+        <a class="btn btn-outline-light description-btn" href="/reservation/4">Забронировать</a>
       </div>
       <div class="row" data-aos="fade-up" data-aos-delay="100">
         <div class="col-lg-12 d-flex justify-content-center">
@@ -314,11 +317,12 @@
         </div>
       </div>
     </div>
-
+    @endif
+    @endforeach
     <div class="container" data-aos="fade-up">
       <div class="section-title">
         <h2 id="sportTitle" class="description-title-text">Спортивный зал и немного другое</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <p class="description-title-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       </div>
       <div class="row" data-aos="fade-up" data-aos-delay="100">
         <div class="col-lg-12 d-flex justify-content-center">

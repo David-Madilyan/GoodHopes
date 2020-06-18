@@ -20,6 +20,7 @@ Route::group(['middleware' => 'auth'], function() {
       Route::post('/delete-client-request', 'AdminController@DeleteRequestClient')->name('delete-client');
       Route::post('/add-client-request', 'AdminController@AddNewClient')->name('add-client');
       Route::post('/change-client-request', 'AdminController@ChangeDataClient')->name('change-client');
+      Route::post('/change-rooms-request', 'AdminController@ChangeDataRooms')->name('change-rooms');
     });
 
 });
@@ -29,8 +30,8 @@ Route::view('/', 'index');
 
 
 
-Route::view('description', 'description')->name('description-page');
-Route::view('reservation', 'reserv')->name('reserv-page');
+Route::get('description', 'HomeController@GetAllRooms')->name('description-page');
+Route::get('reservation/{type?}', 'ReservationController@index')->name('reserv-page')->where('type', '[0-9]+');
 Route::view('contact', 'contact.contact')->name('contact-page');
 
 

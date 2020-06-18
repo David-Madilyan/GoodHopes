@@ -70,8 +70,6 @@ function ChangeRecordId (object){
   }else{
     $("#check-settle").prop( "checked", true );
   }
-
-  // console.log(JSON.stringify(object));
   uuid = object.uuid;
   $( '#arrival-date' ).val(object.arrival_date);
   $( '#departure-date' ).val(object.departure_date);
@@ -110,6 +108,34 @@ function AddNewClient(){
     },
     error: function (response) {
       // alert(response.error + '. Запрос не был выполнен!');
+    }
+  });
+}
+
+// функция для сохранения данных о комнатах
+function SaveChangePriceRoom(){
+  var rowCount = $('#table-prices tr').length - 1;
+  var listRoom = {};
+  for(let i = 0; i < rowCount; i++){
+    var d = {};
+    d['name'] = $('#item-price-name-' + i).val();
+    d['price'] = parseInt($('#item-price-price-' + i).val());
+    d['description'] = $('#item-price-discription-' + i).val();
+    d['type'] = $('#item-price-type-' + i).val();
+    listRoom['room' + i] = d;
+  }
+  // console.log(listRoom);
+  $.ajax({
+    url: 'panel/change-rooms-request',
+    data: listRoom,
+    type: 'POST',
+    dataType: 'json',
+
+    success: function (response) {
+      alert(response.success);
+    },
+    error: function (response) {
+      alert(response.error + '. Запрос не был выполнен!');
     }
   });
 }

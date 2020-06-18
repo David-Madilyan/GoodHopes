@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Record;
-use App\Models\Price;
+use App\Models\Room;
 use Illuminate\Support\Str;
 
 class AdminController extends Controller
@@ -13,8 +13,8 @@ class AdminController extends Controller
     // get all records from db
     protected function Index(){
         $records = DB::table('records')->get();
-        $prices = DB::table('prices')->get();
-        return view('auth.userAdmin', compact('records', 'prices'));
+        $rooms = DB::table('rooms')->get();
+        return view('auth.userAdmin', compact('records', 'rooms'));
     }
 
     protected function ComfirmClient(Request $req){
@@ -62,7 +62,7 @@ class AdminController extends Controller
             $record->uuid = Str::uuid();
             $record->confirmed = $req->input('confirmed');
 
-            $room =  DB::table('prices')->where('room_type', $record->type_room)->first();
+            $room =  DB::table('rooms')->where('room_type', $record->type_room)->first();
             $record->price = $room->price * $days;
 
             $record->save();
@@ -91,5 +91,27 @@ class AdminController extends Controller
             return response()->json([ 'error'=> $e->getMessage() ]);
         }
         return response()->json([ 'success'=>'Запись была успешно Обновлена.' ]);
+    }
+
+    protected function ChangeDataRooms(Request $data){
+        // $room = new Room();
+        try{
+            for ($i = 0; $i < count($data->all()); $i++) {
+              $name = $data->input("room{$i}.name");
+              $price = $data->input("room{$i}.price");
+              $description = $data->input("room{$i}.description");
+              $type = $data->input("room{$i}.type");
+              DB::table('rooms')->where('type', $type)->update([
+                'name' => $name,
+                'price' => $price,
+                'description' => $description,
+                // 'type' => $type
+              ]);
+            }
+        }catch(Exception $e){
+            return response()->json([ 'error'=> $e->getMessage() ]);
+        }
+        return response()->json([ 'success'=>'Данные о номерах успешно сохранены.' ]);
+
     }
 }
