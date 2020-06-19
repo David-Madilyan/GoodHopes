@@ -41,7 +41,11 @@
                   <select class="custom-select mr-sm-2" id="inlineRoomSelect" name="type-room" required="">
                     <option value="" selected>Выберите номер</option>
                     @foreach($rooms as $room)
-                      <option value="{{ $room->type }}">{{ $room->name }}</option>
+                      @if($type == $room->type)
+                          <option value="{{ $room->type }}" selected>{{ $room->name }}</option>
+                      @else
+                          <option value="{{ $room->type }}">{{ $room->name }}</option>
+                      @endif
                     @endforeach
                   </select>
                 </div>
@@ -80,4 +84,11 @@
     </form>
   </div>
 </section>
+@endsection
+
+@section('scripts')
+  <script type="text/javascript" src="http://127.0.0.1:8000/js/vendor/jquery.maskedinput.min.js"></script>
+  <script type="text/javascript" src="http://127.0.0.1:8000/js/vendor/datepicker/bootstrap-datepicker.min.js"></script>
+  <script type="text/javascript" src="http://127.0.0.1:8000/js/vendor/datepicker/bootstrap-datepicker.ru.min.js"></script>
+  <script type="text/javascript" src="http://127.0.0.1:8000/js/dateInit.js"></script>
 @endsection

@@ -13,7 +13,9 @@ use DateTime;
 class ReservationController extends Controller
 {
     public function index(Request $req){
-
+      $arrArrival = DB::table('records')->pluck('arrival_date');
+      $arrDepart = DB::table('records')->pluck('departure_date');
+      
       $rooms = DB::table('rooms')->get();
       $type = $req->route('type');
       return view('reserv', compact( 'rooms', 'type' ));

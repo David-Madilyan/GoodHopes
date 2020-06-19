@@ -449,3 +449,8 @@
     </div>
   </section>
 @endsection
+
+@section('scripts')
+  <script type="text/javascript" src="http://127.0.0.1:8000/js/vendor/highslide/highslide.min.js"></script>
+  <script type="text/javascript" src="http://127.0.0.1:8000/js/photo.js"></script>
+@endsection

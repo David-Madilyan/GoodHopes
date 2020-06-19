@@ -2,16 +2,19 @@
 
 use Illuminate\Support\Facades\Route;
 
-Auth::routes([
-  'reset' => false,
-  'confirm' => false,
-  'register' => false,
-  'verify' => false
-]);
 
+Route::group(['prefix' => 'administrator/page'], function () {
+  Auth::routes([
+    'reset' => false,
+    'confirm' => false,
+    'register' => false,
+    'verify' => false
+  ]);
+  Route::get('logout', 'Auth\LoginController@logout')->name('get-logout');
+});
+
+// необходим кастомный middleware для этих маршрутов, чтобы не было портянок
 // маршруты используемые после авторизации администратора
-Route::get('logout', 'Auth\LoginController@logout')->name('get-logout');
-
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/panel', 'AdminController@Index')->name('admin-panel');
 

@@ -12,14 +12,6 @@ $(window).on('load', function() {
       }
     }
 
-    if(pathname == "/reservation" ){
-      $('#review-link').remove();
-      $('#services-link').remove();
-      $(function(){
-        $("#masked-phone-text").mask("8(999) 999-99-99");
-      });
-    }
-
     if(pathname == "/description" ){
       $('#review-link').remove();
       $('#services-link').remove();
@@ -39,8 +31,6 @@ $(window).on('load', function() {
 
 $('.counter-up').counterUp({ delay: 10,  time: 1500 });
 
-
-hs.graphicsDir = 'js/vendor/highslide/graphics/';
 // code for description
 
 $(document).ready(function(){
@@ -101,28 +91,6 @@ $(document).ready(function(){
   $(document).ready(function() {
     $('.venobox').venobox({'share': false});
   });
-});
-
-// функция получения даты сегодняшнего дня
-function getCurDate() {
-  var today = new Date();
-  var dd = String(today.getDate()).padStart(2, '0');
-  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-  var yyyy = today.getFullYear();
-  today = dd + '.' + mm + '.' + yyyy;
-  return today;
-}
-
-// datepicker path code
-$('.input-daterange').datepicker({
-  language: "ru",
-  clearBtn: true,
-  orientation: "bottom auto",
-  multidate: false,
-  todayHighlight: true,
-  startDate: getCurDate(),
-  format: 'mm/dd/yyyy',
-  toggleActive: true
 });
 
  $("input[type='number']").inputSpinner();

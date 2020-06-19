@@ -1,7 +1,7 @@
 @section('navbar')
   <nav class="navbar navbar-expand-xl navbar-light sticky-top">
     @guest
-      <a class="navbar-brand" href="{{ route('home') }}"><img class="navbar-img-logo" src="assets/img/icons/logo1.PNG" /></a>
+      <a class="navbar-brand" href="{{ route('home') }}"><img class="navbar-img-logo" src="http://127.0.0.1:8000/assets/img/icons/logo1.PNG" /></a>
     @endguest
     @auth
       <h5>Панель администратора</h5>

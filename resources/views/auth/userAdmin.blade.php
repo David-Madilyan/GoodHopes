@@ -135,6 +135,10 @@
 @endsection
 
 @section('scripts')
-  <script type="text/javascript" src="js/vendor/datatables/datatables.min.js"></script>
-  <script type="text/javascript" src="js/panel.js"></script>
+  <script type="text/javascript" src="http://127.0.0.1:8000/js/vendor/datepicker/bootstrap-datepicker.min.js"></script>
+  <script type="text/javascript" src="http://127.0.0.1:8000/js/vendor/datepicker/bootstrap-datepicker.ru.min.js"></script>
+  <script type="text/javascript" src="http://127.0.0.1:8000/js/vendor/jquery.maskedinput.min.js"></script>
+  <script type="text/javascript" src="http://127.0.0.1:8000/js/vendor/datatables/datatables.min.js"></script>
+  <script type="text/javascript" src="http://127.0.0.1:8000/js/dateInit.js"></script>
+  <script type="text/javascript" src="http://127.0.0.1:8000/js/panel.js"></script>
 @endsection
