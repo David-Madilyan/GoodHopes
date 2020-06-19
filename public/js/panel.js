@@ -8,6 +8,18 @@ $(document).ready(function () {
   $('#price-room-form').hide();
   $('#price-one-day').attr('type', 'number');
 });
+
+$('.input-daterange').datepicker({
+  language: "ru",
+  clearBtn: true,
+  orientation: "bottom auto",
+  multidate: false,
+  todayHighlight: true,
+  startDate: getCurDate(),
+  format: 'mm/dd/yyyy',
+  toggleActive: true
+});
+
 var uuid = "";
 $.ajaxSetup({
     headers: {

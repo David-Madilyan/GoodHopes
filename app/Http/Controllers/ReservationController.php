@@ -8,18 +8,43 @@ use App\Http\Requests\ReservRequest;
 use Illuminate\Support\Str;
 use App\Models\Room;
 use Illuminate\Support\Facades\DB;
+use App\Http\Services\DateConverter;
 use DateTime;
 
 class ReservationController extends Controller
 {
     public function index(Request $req){
-      $arrArrival = DB::table('records')->pluck('arrival_date');
-      $arrDepart = DB::table('records')->pluck('departure_date');
-      
-      $rooms = DB::table('rooms')->get();
-      $type = $req->route('type');
-      return view('reserv', compact( 'rooms', 'type' ));
-      // return dd($req->route('type'));
+        try {
+            $records = DB::table('records')->get();
+            $rooms = DB::table('rooms')->get();
+        } catch (Exception $e) {
+
+        }
+        $a1 = new DateConverter();
+        $a2 = new DateConverter();
+        $a3 = new DateConverter();
+        $a4 = new DateConverter();
+        $disableDates = array();
+        foreach($records as $record){
+            switch ($record->type_room) {
+                case 1:
+                    $a1->setDates($record->arrival_date, $record->departure_date);
+                  break;
+                case 2:
+                    $a2->setDates($record->arrival_date, $record->departure_date);
+                  break;
+                case 3:
+                    $a3->setDates($record->arrival_date, $record->departure_date);
+                  break;
+                case 4:
+                    $a4->setDates($record->arrival_date, $record->departure_date);
+                  break;
+            }
+        }
+        array_push($disableDates, $a1->getDates(), $a2->getDates(), $a3->getDates(), $a4->getDates());
+        // return dd($disableDates);
+        $type = $req->route('type');
+        return view('reserv', compact( 'rooms', 'type', 'disableDates' ));
     }
 
     //для этого метода нужно еще отправлять на почту владельца письмо

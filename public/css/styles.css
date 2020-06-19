@@ -883,7 +883,7 @@ a:focus, a:active, a:visited {
 .dropdown-menu {
   font-family: 'Gabriela', serif;
   font-size: 1em;
-  color: #777 !important;
+  color: #000 !important;
   background-color: #c2cad0;
   font-size: 16px !important;
 }

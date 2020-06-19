@@ -50,8 +50,8 @@ class AdminController extends Controller
 
     protected function AddNewClient ( Request $req ){
         $record = new Record();
-        $days = $req->input('daysLag');
         try {
+            $days = $req->input('daysLag');
             $record->arrival_date = $req->input('arrival');
             $record->departure_date = $req->input('depart');
             $record->email = $req->input('email');
@@ -62,7 +62,7 @@ class AdminController extends Controller
             $record->uuid = Str::uuid();
             $record->confirmed = $req->input('confirmed');
 
-            $room =  DB::table('rooms')->where('room_type', $record->type_room)->first();
+            $room =  DB::table('rooms')->where('type', $record->type_room)->first();
             $record->price = $room->price * $days;
 
             $record->save();

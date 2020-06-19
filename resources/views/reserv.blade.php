@@ -19,7 +19,6 @@
     Заявка была отправлена.
   </div>
   @endif
-
   <div class="container form-container form-style" data-form-type="formoid">
   <form class="form-reserv" action="{{ route('reserv-request') }}" method="post">
     @csrf
@@ -39,7 +38,7 @@
               <div class="col-xl-6 col-lg-5 col-md-7 col-sm-10 col-10 d-flex justify-content-center">
                 <div class="col-auto my-1">
                   <select class="custom-select mr-sm-2" id="inlineRoomSelect" name="type-room" required="">
-                    <option value="" selected>Выберите номер</option>
+                    <option value="0" selected>Выберите номер</option>
                     @foreach($rooms as $room)
                       @if($type == $room->type)
                           <option value="{{ $room->type }}" selected>{{ $room->name }}</option>
@@ -91,4 +90,12 @@
   <script type="text/javascript" src="http://127.0.0.1:8000/js/vendor/datepicker/bootstrap-datepicker.min.js"></script>
   <script type="text/javascript" src="http://127.0.0.1:8000/js/vendor/datepicker/bootstrap-datepicker.ru.min.js"></script>
   <script type="text/javascript" src="http://127.0.0.1:8000/js/dateInit.js"></script>
+  <script type="text/javascript">
+    $(function (){
+      if ($( '#inlineRoomSelect' ).children("option:selected").val() != "0") {
+        InitDatePicker(@json($disableDates[intval($type) - 1]));
+      }else InitDatePicker("");
+      setDates(@json($disableDates));
+    });
+  </script>
 @endsection
