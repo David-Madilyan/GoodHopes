@@ -903,7 +903,12 @@ a:focus, a:active, a:visited {
   padding: 2rem;
   background-color: #88ad898D;
 }
-
+.reserv-text-strong{
+  font-family: 'Gabriela', serif;
+  font-size: 1.2rem;
+  color: #678 !important;
+  margin-top: 2.5rem;
+}
 @media (max-width: 1200px){
   #inlineRoomSelect{
     font-size: 12px !important;

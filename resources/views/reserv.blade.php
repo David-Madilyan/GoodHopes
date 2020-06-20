@@ -13,10 +13,14 @@
     </ul>
   </div>
   @endif
-
+  @if (session('error'))
+      <div class="alert alert-danger text-center msg" id="custom-error">
+      <strong>{{ session('error') }}</strong>
+      </div>
+  @endif
   @if(Session::has('success-record'))
-  <div class="alert alert-success" id="alert-message" role="alert" style="margin-left: 2rem; margin-right: 2rem;">
-    Заявка была отправлена.
+  <div class="alert alert-success text-center msg" id="alert-message" role="alert" style="margin-left: 2rem; margin-right: 2rem;">
+    <strong>{{ session('success-record') }}</strong>
   </div>
   @endif
   <div class="container form-container form-style" data-form-type="formoid">
@@ -63,24 +67,25 @@
           <input type="text" required="" name="username" value="" class="form-control input-style-form input1" placeholder="Ф И О">
         </div>
       </div>
-
       <div class="form-group">
         <div class="d-flex justify-content-center">
           <input type="text" required="" name="email" value="" class="form-control input-style-form" placeholder="Введите email">
         </div>
       </div>
-
       <div class="form-group">
         <div class="d-flex justify-content-center">
           <input id="masked-phone-text" type="text" required="" name="phone" value="" class="form-control input-style-form" placeholder="Номер телефона">
         </div>
       </div>
-
       <div class="container container-fluid d-flex justify-content-center">
         <button class="btn btn-form btn-outline-light reserv-btn" type="submit" href="">Подать заявку</button>
       </div>
-
     </form>
+  </div>
+  <div>
+    <div class="text-center msg reserv-text-strong">
+      <strong>Заезд и отъезд из номеров производятся в 14:00</strong>
+    </div>
   </div>
 </section>
 @endsection
@@ -92,10 +97,12 @@
   <script type="text/javascript" src="http://127.0.0.1:8000/js/dateInit.js"></script>
   <script type="text/javascript">
     $(function (){
-      if ($( '#inlineRoomSelect' ).children("option:selected").val() != "0") {
-        InitDatePicker(@json($disableDates[intval($type) - 1]));
-      }else InitDatePicker("");
-      setDates(@json($disableDates));
+      @if ($type < 6)
+        InitDatePicker(@json($disableDates[intval($type - 1)]));
+      @else
+        InitDatePicker("");
+        setDates(@json($disableDates));
+      @endif
     });
   </script>
 @endsection

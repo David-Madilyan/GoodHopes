@@ -3,6 +3,7 @@ $('#services-link').remove();
 $("#masked-phone-text").mask("8(999) 999-99-99");
 var array = {};
 var dis = {};
+
 function getCurDate() {
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, '0');
@@ -22,7 +23,7 @@ function setDisabledDates(disabled){
 function InitDatePicker(arrDisebledDates){
   // console.log(arrDisebledDates);
   // var arrDates = JSON.parse(arrDisebledDates);
-  $('#datepicker').datepicker({
+  $('#datepicker #input-start, #input-end').datepicker({
     language: "ru",
     clearBtn: true,
     orientation: "bottom auto",
@@ -34,23 +35,36 @@ function InitDatePicker(arrDisebledDates){
     datesDisabled: arrDisebledDates
   });
 }
-// .on('show', function(e){
-//   $('#datepicker').datepicker('setDatesDisabled', dis);
-// });
 
+// функиция делает недоступными занятые даты в датапикере
 $(function(){
   $('#inlineRoomSelect').change(function(){
-    var type = $( '#inlineRoomSelect' ).children("option:selected").val();
-    // setDisabledDates(array[type - 1]);
-    $('#input-start').datepicker('setDatesDisabled', array[type - 1]);
-    $('#input-end').datepicker('setDatesDisabled', array[type - 1]);
-    console.log(array[type - 1]);
+      var type = $( '#inlineRoomSelect' ).children("option:selected").val();
+      if(type > 0){
+        $('#input-start').datepicker('setDatesDisabled', array[type - 1]);
+        $('#input-end').datepicker('setDatesDisabled', array[type - 1]);
+        $('#input-start').datepicker('setDate', null);
+        $('#input-end').datepicker('setDate', null);
+        setDisabledDates(array[type - 1]);
+        console.log(array[type - 1]);
+      }else{
+        $('#input-start').datepicker('setDatesDisabled', "");
+        $('#input-end').datepicker('setDatesDisabled', "");
+      }
   });
 });
-$('.datepicker').datepicker()
-  .on("show", function(e) {
-      // `e` here contains the extra attributes
+// функция проверяет не находится ли выбранный промежуток дат пользователем между занятыми датами
+$('#datepicker').datepicker().on('changeDate', function (ev) {
+    // console.log($('#input-end').val());
+    var start = new Date($('#input-start').val());
+    var end = new Date($('#input-end').val());
+    for(let i =0; i < dis.length; i++){
+      var disDate = new Date(dis[i]);
+      if((start < disDate) && (end > disDate)){
+        $('#input-end').datepicker('setDate', null);
+        $('#input-start').datepicker('setDate', null);
+        // console.log('is date not valid');
+        break;
+      }
+    }
 });
-// $('#datepicker input').datepicker({
-//     datesDisabled: ['06/06/2020', '06/21/2020']
-// });

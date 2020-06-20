@@ -9,6 +9,15 @@ $(document).ready(function () {
   $('#price-one-day').attr('type', 'number');
 });
 
+function getCurDate() {
+  var today = new Date();
+  var dd = String(today.getDate()).padStart(2, '0');
+  var mm = String(today.getMonth() + 1).padStart(2, '0');
+  var yyyy = today.getFullYear();
+  today = mm + '/' + dd + '/' + yyyy;
+  return today;
+}
+
 $('.input-daterange').datepicker({
   language: "ru",
   clearBtn: true,

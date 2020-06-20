@@ -38,7 +38,9 @@ $(document).ready(function(){
   if($("div").is("#alert-message")){
     $("#alert-message").fadeOut(3000, function(){});
   }
-
+  if($("div").is("#custom-error")){
+    $("#custom-error").fadeOut(6000, function(){});
+  }
   // для контейнера <div class="container" data-aos="fade-up"> 0
    var descriptionIsotopeAll = $('.description-container-all').isotope({
      itemSelector: '.description-all-item'
