@@ -35,9 +35,14 @@
                     </ul>
                   </div>
                   @endif
+                  @if (session('error-contact'))
+                      <div class="alert alert-danger text-center msg" id="custom-error">
+                        <strong>{{ session('error-contact') }}</strong>
+                      </div>
+                  @endif
                   @if(Session::has('success-contact'))
-                  <div class="alert alert-success" role="alert">
-                    Сообщение было отправлено.
+                  <div class="alert alert-success text-center msg" role="alert">
+                    <strong>{{ session('success-contact') }}</strong>
                   </div>
                   @endif
                   <div class="row input-main-contact">
@@ -54,7 +59,7 @@
               <div class="content-panel">
                   <div class="text-block pb-3">
                       <h5 class="title-address-contact">Адрес</h5>
-                      <p class="other-text-form">Город Сочи, Кудепста, улица "На добрых надежд" дом 3, 354387</p>
+                      <p class="other-text-form">Город Сочи, Кудепста, улица Добрых надежд, дом 3, 354349</p>
                   </div>
                   <div class="text-block pb-3">
                       <h5 class="title-address-contact">Позвоните нам</h5>

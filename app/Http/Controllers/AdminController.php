@@ -10,13 +10,19 @@ use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
-    // get all records from db
+    // возвращает страницу panel для администратора
     protected function Index(){
-        $records = DB::table('records')->get();
-        $rooms = DB::table('rooms')->get();
-        return view('auth.userAdmin', compact('records', 'rooms'));
+      try {
+          $records = DB::table('records')->get();
+          $rooms = DB::table('rooms')->get();
+      } catch (Exception $e) {
+          return response()->view('errors.500', [], 500);
+      }
+      return view('auth.userAdmin', compact('records', 'rooms'));
+
     }
 
+    // метод подтверждает заявку, которая была сделана с reserv.blade.php
     protected function ComfirmClient(Request $req){
         $uuid = $req->input('uuid');
         try {
@@ -33,7 +39,7 @@ class AdminController extends Controller
         // return response()->json(['success'=> 'asdadads ada as ' . $findRecord->username ]);
     }
 
-
+    // метод удаляет запись на бронивароние
     protected function DeleteRequestClient(Request $req){
 
         $uuid = $req->input('uuid');
@@ -48,6 +54,7 @@ class AdminController extends Controller
         ->json(['success'=>'Запись была успешно удалена.']);
     }
 
+    // добавляет новую запись о бронировании номера
     protected function AddNewClient ( Request $req ){
         $record = new Record();
         try {
@@ -72,6 +79,7 @@ class AdminController extends Controller
         return response()->json([ 'success'=>'Запись была успешно добавлена.' ]);
     }
 
+    // метод меняет данные об отдельной записи
     protected function ChangeDataClient(Request $req){
         try {
             Record::where('uuid', $req->input('uuid'))->update(
@@ -93,6 +101,7 @@ class AdminController extends Controller
         return response()->json([ 'success'=>'Запись была успешно Обновлена.' ]);
     }
 
+    // метод меняет данные о номерах на странице описания
     protected function ChangeDataRooms(Request $data){
         // $room = new Room();
         try{
@@ -112,6 +121,5 @@ class AdminController extends Controller
             return response()->json([ 'error'=> $e->getMessage() ]);
         }
         return response()->json([ 'success'=>'Данные о номерах успешно сохранены.' ]);
-
     }
 }

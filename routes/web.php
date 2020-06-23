@@ -32,13 +32,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::view('/', 'index');
 
 
+Route::get('reservation/confirm/client/{uuid?}', 'ReservationController@ConfirmClient')->name('confirm-email');
+Route::get('reservation/{type?}', 'ReservationController@index')->name('reserv-page')->where('type', '[0-9]+');
+Route::post('reservation/rooms/getAvailable/', 'ReservationController@FetchRoomsByType')->name('fetch-rooms');
+Route::post('/reservation/sumbit/room', 'ReservationController@AddUserToSheduler')->name('reserv-request');
 
 Route::get('description', 'HomeController@GetAllRooms')->name('description-page');
-Route::get('reservation/{type?}', 'ReservationController@index')->name('reserv-page')->where('type', '[0-9]+');
 Route::view('contact', 'contact.contact')->name('contact-page');
 
 
 Route::post('contact/sumbit/message', 'ContactController@SumbitMessage')->name('contact-form');
-Route::post('reservation/sumbit/room', 'ReservationController@AddUserToSheduler')->name('reserv-request');
-
-Route::get('/send', 'MailController@send')->name('sender-control');

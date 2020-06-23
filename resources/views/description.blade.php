@@ -199,7 +199,7 @@
       </div>
     </div>
     @endif
-    @if($room->type == 4)
+    @if($room->type == 3)
     <div class="container" data-aos="fade-up">
       <div class="section-title">
         <h2 id="room2Title" class="description-title-text">{{ $room->name }}</h2>

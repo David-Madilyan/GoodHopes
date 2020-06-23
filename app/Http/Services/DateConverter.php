@@ -3,6 +3,10 @@
 namespace App\Http\Services;
 use DateTime;
 
+/*
+ *  сервис позволяет получать все даты находящиеся в промежутке  между двумя произвольными датами
+ *  в массив включаются дата startTime, но не включается endTime
+ */
 class DateConverter {
     private $dates;
     function __construct() {

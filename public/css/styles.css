@@ -190,9 +190,7 @@ div {
 
 
 .navbar-img-logo{
-  width: 150px;
   height: 69px;
-  transform: rotate()
 }
 .carousel-inner {
   height: 850px;
@@ -788,7 +786,7 @@ a:focus, a:active, a:visited {
   border-radius: 0.5rem;
   background-color: transparent;
   font-size: 1rem;
-  line-height: 2.5rem;
+  line-height: 1.5rem;
   font-weight: 700;
   font-family: 'Gabriela', serif;
   letter-spacing: 0.05em;
@@ -802,7 +800,7 @@ a:focus, a:active, a:visited {
   border-radius: 0.5rem;
   background-color: transparent;
   font-size: 1rem;
-  line-height: 2.5rem;
+  line-height: 1.5rem;
   font-weight: 700;
   font-family: 'Gabriela', serif;
   letter-spacing: 0.05em;
@@ -824,6 +822,44 @@ a:focus, a:active, a:visited {
 
 
 /* styles for reservation page */
+.fetch-container-item{
+  border-radius: 0.6rem;
+  background: linear-gradient(180deg, #EAE8DC, #EAE2DC, #F9F7F9);
+  box-shadow: 0px 0px 30px 0px rgba(115, 128, 157, 0.5);
+}
+
+.container-find-rooms{
+  margin-bottom: 0.5rem;
+}
+.fetch-name-room{
+  margin-right: 0.5rem;
+  left: 0px;
+  font-family: 'Gabriela', serif;
+  color: #777;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+.fetch-room-title{
+  font-size: 1.5rem;
+  color: #83687B;
+}
+
+.fetch-price-room{
+  font-family: 'Gabriela', serif;
+  color: #555;
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.fetch-data-input{
+  font-family: 'Gabriela', serif;
+  border-radius: 0.6rem;
+  color: #555;
+  border: 0rem solid #79B9DD;
+  background-color: #FFB38F;
+  box-shadow: 0px 0px 10px 0px rgba(115, 128, 157, 0.5);
+}
+
 .reserv-back-img{
   position: absolute;
   width: 100%;
@@ -842,7 +878,7 @@ a:focus, a:active, a:visited {
   font-family: 'Gabriela', serif;
   font-size: 30px;
   text-align: center;
-  color: #444;
+  color: #777 !important;
 }
 
 #datepicker{
@@ -853,7 +889,7 @@ a:focus, a:active, a:visited {
   font-size: 1rem;
   max-width: 15rem;
   font-family: 'Gabriela', serif;
-  height: 4rem;
+  height: 3rem;
   background-color: #edf5e1;
   box-shadow: 0px 0px 30px 0px rgba(115, 128, 157, 0.5);
 }
@@ -872,14 +908,18 @@ a:focus, a:active, a:visited {
   text-transform: uppercase;
   transition-duration: 0.25s;
   color: #333;
-  height: 2.5rem;
+  height: 3rem;
   box-shadow: 0px 0px 30px 0px rgba(115, 128, 157, 0.5);
 }
 
 .reserv-btn:hover{
   background-color: #c5cbe3;
 }
-
+.btn-request{
+  border: 0.15rem solid #edf5e1;
+  background-color: #FFB38F;
+  border-radius: 0.45rem;
+}
 .dropdown-menu {
   font-family: 'Gabriela', serif;
   font-size: 1em;
@@ -1044,9 +1084,10 @@ a:focus, a:active, a:visited {
 }
 
 /* все что касается оформления для футера */
+
 footer{
   font-family: 'Comfortaa', cursive;
-  margin-top: 5px;
+  margin-top: auto;
 }
 
 .fa-map-marker-alt, .fa-envelope, .fa-mobile-alt{
