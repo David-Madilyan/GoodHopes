@@ -99,7 +99,9 @@ body, html {
     margin-right: 15px;
     font-weight: 700;
 }
-
+.p-3 {
+    padding: 0.2rem!important;
+}
 .navbar{
     /* background-color: #8B4E6D; */
     /* background-color: #E7717D; */
@@ -125,7 +127,7 @@ body, html {
 }
 @media (max-width: 1000px) {
   .carousel-caption .display-2{
-    font-size: 4em;
+    font-size: 3em;
   }
   .room-desc{
     position:relative;
@@ -147,10 +149,11 @@ div {
 }
 
 .counter-up {
-  font-family: 'Comfortaa', bold;
-    font-size: 38px;
-    display: block;
-    color: #454546;
+  font-family: 'Amatic SC', bold;
+  font-weight: 700;
+  font-size: 38px;
+  display: block;
+  color: #454546;
 }
 .fact-caption{
   font-size: 30px;
@@ -193,7 +196,7 @@ div {
   height: 69px;
 }
 .carousel-inner {
-  height: 850px;
+  height: 722px;
 }
 
 .carousel-inner img {
@@ -219,7 +222,7 @@ div {
 }
 
 h1, h5, h4, h3 {
-  color: #333 !important;
+  color: #fff !important;
   font-family: 'Comfortaa', cursive;
 }
 
@@ -843,7 +846,9 @@ a:focus, a:active, a:visited {
   font-size: 1.5rem;
   color: #83687B;
 }
-
+.fetch-text-error{
+  font-size: 1rem !important;
+}
 .fetch-price-room{
   font-family: 'Gabriela', serif;
   color: #555;

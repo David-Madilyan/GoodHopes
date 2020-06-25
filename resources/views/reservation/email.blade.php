@@ -6,6 +6,7 @@
   Имя заявителя: {{ $record->username }}.<br>
   Мобильный телефон: {{ $record->phone }}.<br>
   Электронная почта: {{ $record->email }}.<br>
+  Cумма за проживание: {{ $record->price }}.<br>
 <hr>
 <a href="{{ $route_confirm }}" style="padding: 0 1rem;
   border: 0.25rem solid #79B9DD;

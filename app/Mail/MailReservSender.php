@@ -36,7 +36,7 @@ class MailReservSender extends Mailable
     public function build()
     {
         return $this->markdown('reservation.email')
-        ->to('madilyan2016@mail.ru')
+        ->to('ongoodhopes@gmail.com')
         ->subject("Заявка на бронь")
         ->with([
           'record' => $this->record,

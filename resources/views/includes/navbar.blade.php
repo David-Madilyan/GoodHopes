@@ -1,5 +1,5 @@
 @section('navbar')
-  <nav class="navbar navbar-expand-xl navbar-light sticky-top">
+  <nav class="navbar navbar-expand-xl navbar-light sticky-top shadow-sm p-3 mb-5">
     @guest
       <a class="navbar-brand" href="{{ route('home') }}"><img class="navbar-img-logo" src="http://127.0.0.1:8000/assets/svg/logo_main.svg" /></a>
     @endguest

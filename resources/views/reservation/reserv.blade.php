@@ -69,7 +69,7 @@
   </div>
   <div>
     @if(isset($data['available1'])  && isset($data['available2']) && isset($data['available3']))
-      @if($data['available1'] < 10 || $data['available2'] < 5 || $data['available3'] < 4)
+      @if($data['available1'] < 10 || $data['available2'] < 4 || $data['available3'] < 5)
         <div class="text-center msg reserv-text-strong">
           <hr>
           <div class="fetch-room-title">Доступные номера</div>
@@ -77,8 +77,10 @@
         <hr>
       @else
         <div class="text-center msg reserv-text-strong">
-          <div class="alert alert-danger text-center msg fetch-room-title" id="custom-error">
-          <strong>К сожалению, с {{ $arrival }} по {{ $depart }} нет свободных номеров, вы можете выбрать более поздние даты)).</strong>
+          <div class="alert alert-danger text-center msg fetch-room-title">
+            <div class="fetch-text-error">
+              К сожалению, с {{ $arrival }} по {{ $depart }} нет свободных номеров, вы можете выбрать более поздние даты)).
+            </div>
           </div>
         </div>
       @endif
@@ -87,6 +89,29 @@
           @if(intval($type) > 0)
             @foreach($rooms as $room)
               @if($data['available1'] < 10 && intval($type) == $room->type)
+                <div class="col-md-4 mb-3 mb-md-0">
+                    <div class="card py-4 h-60 shadow p-3 mb-5 bg-white fetch-container-item">
+                        <div class="card-body text-center">
+                          <div class="fetch-name-room">{{ $room->name }}</div>
+                          <div class="fetch-price-room">{{ $room->price }} руб. за сутки</div>
+                          <a class="btn btn-outline-light fetch-data-input" onclick='OpenInputDataForm("{{ $room->type }}");'>Ввести данные</a>
+                        </div>
+                    </div>
+                </div>
+              @endif
+              @if($data['available2'] < 4 && intval($type) == $room->type)
+                <div class="col-md-4 mb-3 mb-md-0">
+                  {{$data['available2']}}
+                    <div class="card py-4 h-60 shadow p-3 mb-5 bg-white fetch-container-item">
+                        <div class="card-body text-center">
+                          <div class="fetch-name-room">{{ $room->name }}</div>
+                          <div class="fetch-price-room">{{ $room->price }} руб. за сутки</div>
+                          <a class="btn btn-outline-light fetch-data-input" onclick='OpenInputDataForm("{{ $room->type }}");'>Ввести данные</a>
+                        </div>
+                    </div>
+                </div>
+              @endif
+              @if($data['available3'] < 5 && intval($type) == $room->type)
                 <div class="col-md-4 mb-3 mb-md-0">
                     <div class="card py-4 h-60 shadow p-3 mb-5 bg-white fetch-container-item">
                         <div class="card-body text-center">
@@ -111,7 +136,7 @@
                     </div>
                 </div>
               @endif
-              @if($data['available2'] < 5 && $room->type == 2)
+              @if($data['available2'] < 4 && $room->type == 2)
                 <div class="col-md-4 mb-3 mb-md-0">
                     <div class="card py-4 h-60 shadow p-3 mb-5 bg-white fetch-container-item">
                         <div class="card-body text-center">
@@ -122,7 +147,7 @@
                     </div>
                 </div>
               @endif
-              @if($data['available3'] < 4 && $room->type == 3)
+              @if($data['available3'] < 5 && $room->type == 3)
                 <div class="col-md-4 mb-3 mb-md-0">
                     <div class="card py-4 h-60 shadow p-3 mb-5 bg-white fetch-container-item">
                         <div class="card-body text-center">
@@ -142,7 +167,7 @@
           @csrf
           <input type="hidden" name="arrival" value="{{ $arrival }}">
           <input type="hidden" name="depart" value="{{ $depart }}">
-          <input id="type-selected-room" type="hidden" name="type">
+          <input id="type-selected-room" type="hidden" name="type" value="">
           <input type="hidden" name="count" value="{{ $count }}">
           <div class="form-group">
             <div class="d-flex justify-content-center">

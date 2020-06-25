@@ -24,29 +24,6 @@ class ReservationController extends Controller
         } catch (Exception $e) {
             return response()->view('errors.500', [], 500);
         }
-        // $a1 = new DateConverter();
-        // $a2 = new DateConverter();
-        // $a3 = new DateConverter();
-        // $a4 = new DateConverter();
-        // $disableDates = array();
-        // foreach($records as $record){
-        //     switch ($record->type_room) {
-        //         case 1:
-        //             $a1->setDates($record->arrival_date, $record->departure_date);
-        //           break;
-        //         case 2:
-        //             $a2->setDates($record->arrival_date, $record->departure_date);
-        //           break;
-        //         case 3:
-        //             $a3->setDates($record->arrival_date, $record->departure_date);
-        //           break;
-        //         case 4:
-        //             $a4->setDates($record->arrival_date, $record->departure_date);
-        //           break;
-        //     }
-        // }
-        // array_push($disableDates, $a1->getDates(), $a2->getDates(), $a3->getDates(), $a4->getDates());
-        // // return dd($disableDates);
         $type = $req->route('type');
         if ($type == null){
           $type = 6;
@@ -75,22 +52,23 @@ class ReservationController extends Controller
             $arrival = DateTime::createFromFormat("m/d/Y", $record->arrival_date);
             $depart = DateTime::createFromFormat("m/d/Y", $record->departure_date);
             $interval = $arrival->diff($depart);
-            $curDate = date("m/d/Y");
-            if($curDate->diff($arrival) < 0 || $curDate->diff($depart) < 0){
-                return view('reservation.reserv')->with('error', 'Некорректное значение  даты.');
+            $curDate = new DateTime();
+            $curDate->format('m/d/Y');
+            if($curDate->diff($arrival)->d < 0 || $curDate->diff($depart)->d < 0){
+                return redirect()->route('reserv-page')->with('error', 'Некорректное значение  даты.');
             }
             $room =  DB::table('rooms')->where('type', $record->type_room)->first();
             if($room == null){
-                return view('reservation.reserv')->with('error', 'Заявка не была обработана, попробуйте позже.');
+                return redirect()->route('reserv-page')->with('error', 'Заявка не была обработана, попробуйте позже.');
             }
             $record->price = $room->price * $interval->d;
             $record->save();
 
         }catch(Exception $e){
-            return view('reservation.reserv')->with('error', 'Заявка не была обработана, попробуйте позже.');
+            return redirect()->route('reserv-page')->with('error', 'Заявка не была обработана, попробуйте позже.');
         }
         Mail::send(new MailReservSender($record, $room->name));
-        return view('reservation.reserv')->with('success-record', 'Заявка была отправлена.');
+        return redirect()->route('reserv-page')->with('success-record', 'Заявка была отправлена.');
     }
 
     // метод осущствляет поиск свободных номеров по указаным датам и типу
@@ -113,41 +91,42 @@ class ReservationController extends Controller
                 $records = DB::table('records')->get();
             }else{
                 $records = DB::table('records')->where('type_room', $type)->get();
+                if($type == 1){
+                  $available2 = 5;
+                  $available3 = 6;
+                }
+                if($type == 2){
+                  $available1 = 11;
+                  $available3 = 6;
+                }
+                if($type == 3){
+                  $available1 = 11;
+                  $available2 = 5;
+                }
             }
             foreach($records as $r){
-              $check = true;
               $converter->setDates($r->arrival_date, $r->departure_date);
               foreach($converter->getDates() as $date){
                 if((($date > $arrival) && ($date < $depart)) || (($date == $arrival) || ($date == $depart))) {
-                  $check = false;
-                  break;
-                }
-              }
-              if($check){
-                switch ($r->type_room) {
-                  case 1:
-                  $available1 += 1;
-                  break;
-                  case 2:
-                  $available2 += 1;
-                  break;
-                  case 3:
-                  $available3 += 1;
+                  switch ($r->type_room) {
+                    case 1:
+                    $available1 += 1;
+                    break;
+                    case 2:
+                    $available2 += 1;
+                    break;
+                    case 3:
+                    $available3 += 1;
+                    break;
+                    default:
+                    $available2 += 100;
+                    break;
+                  }
                   break;
                 }
               }
             }
             $rooms = DB::table('rooms')->get();
-            // array_push($availables, $type_1, $type_2, $type_2);
-            // if($type_1 < 10){  array_push($availables, $type_1);  } else $type_1 = 0;
-            // if($type_2 < 5){  array_push($availables, $type_2);  } else $type_2 = 0;
-            // if($type_3 < 4){ array_push($availables, $type_3);  } else $type_3 = 0;
-            // if($type == 0){
-            //     $rooms_available = DB::table('rooms')->where('type',  [$type_1, $type_2, $type_3])->get();
-            // }else{
-            //     $rooms_available = DB::table('rooms')->where('type',  $type_1)->get();
-            // }
-            // return dd($available2);
             $data = array(
                         'available1'  => $available1,
                         'available2' => $available2,

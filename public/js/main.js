@@ -36,7 +36,7 @@ $('.counter-up').counterUp({ delay: 10,  time: 1500 });
 $(document).ready(function(){
   // убирает элемент если такой существует с задержкой
   if($("div").is("#alert-message")){
-    $("#alert-message").fadeOut(3000, function(){});
+    $("#alert-message").fadeOut(6000, function(){});
   }
   if($("div").is("#custom-error")){
     $("#custom-error").fadeOut(6000, function(){});

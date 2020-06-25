@@ -63,7 +63,7 @@
                   </div>
                   <div class="text-block pb-3">
                       <h5 class="title-address-contact">Позвоните нам</h5>
-                      <p class="other-text-form">+7 (999) 4332 643</p>
+                      <p class="other-text-form">+ 7 (918) 405 54 27</p>
                   </div>
               </div>
           </div>
