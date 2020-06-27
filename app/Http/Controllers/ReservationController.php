@@ -54,7 +54,7 @@ class ReservationController extends Controller
             $interval = $arrival->diff($depart);
             $curDate = new DateTime();
             $curDate->format('m/d/Y');
-            if($curDate->diff($arrival)->d < 0 || $curDate->diff($depart)->d < 0){
+            if($arrival < $curDate || $depart < $curDate){
                 return redirect()->route('reserv-page')->with('error', 'Некорректное значение  даты.');
             }
             $room =  DB::table('rooms')->where('type', $record->type_room)->first();
