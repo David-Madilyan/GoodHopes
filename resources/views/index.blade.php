@@ -41,7 +41,7 @@
 
     <div class="section-title">
       <h2 class="title-facts">Оценка на Booking</h2>
-      <p class="fact-caption">Данные с официального сайта "Booking"</p>
+      <p class="fact-caption">Данные с официального сайта &laquoBooking&raquo</p>
     </div>
 
     <div class="row counters d-flex justify-content-center">
@@ -92,7 +92,7 @@
             </svg>
           </div>
           <h4 class="title-services"><a>Сеть Wi-Fi</a></h4>
-          <p class="text-servives">Бесплатный доступ в сеть интернет на всей территории гостевого дома. Вне зависимости от выбранного вами номера.</p>
+          <p class="text-servives">Бесплатный доступ в сеть интернет на всей территории. Вне зависимости от выбранного вами номера.</p>
         </div>
       </div>
 
@@ -105,7 +105,7 @@
             </svg>
           </div>
           <h4 class="title-services"><a>Трансфер</a></h4>
-          <p class="text-servives">Гостевой дом предоставляет услугу по подвозу отдыхающих к пляжам и различным туристическим объектам</p>
+          <p class="text-servives">Встреча гостей, туристов в аэропорту или на железнодорожных вокзалах, и доставка их до гостевого дома и обратно. Как правило, эта услуга заказывается за несколько дней до начала поездки</p>
         </div>
       </div>
 
@@ -158,7 +158,7 @@
             </svg>
           </div>
           <h4 class="title-services"><a>Бассейн</a></h4>
-          <p class="text-servives">На территории гостевого дома есть бассейн под открытом небом и закрытый распологающийся в помещении</p>
+          <p class="text-servives">На территории гостевого дома есть бассейн под открытом небом и закрытый располагающийся в помещении</p>
         </div>
       </div>
 
@@ -217,7 +217,7 @@
   <div class="d-flex justify-content-center">
     <h2 class="title-text">Номера</h2>
   </div>
-  <p class="d-flex justify-content-center text">Самое важное для владельцев гостевого дома является обеспечение всем необходимым постояльцев и гостей, чтобы они ни в чем не нуждались и прекрасно проводили время на отдыхе. Помимо всех перечисленных услуг предоставляются следующие виды номеров</p>
+  <p class="d-flex justify-content-center text">Самое важное для владельцев гостевого дома является обеспечение всем необходимым гостей, чтобы они ни в чем не нуждались и прекрасно проводили время на отдыхе. Помимо всех перечисленных услуг предоставляются следующие виды номеров</p>
   <div class="d-flex justify-content-center">
     <a class="btn btn-outline-light button btn-details" href="{{ route('description-page') }}">Подробнее</a>
   </div>
@@ -234,7 +234,6 @@
           <img src="assets/img/home/room2_3.jpg" class="d-block " alt="room type 2">
           <div class="carousel-caption room-desc">
             <h3 class="carousel-description">Двухместный делюкс</h3>
-            <!-- <h5 class="carousel-description">с одноместной кроватью и двухспальной кроватью</h5> -->
           </div>
         </div>
         <div class="item-room carousel-item">

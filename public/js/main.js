@@ -70,12 +70,23 @@ $(document).ready(function(){
     itemSelector: '.description-item1'
   });
 
- $('#description-flters1 li').on('click', function() {
-   $("#description-flters1 li").removeClass('filter-active1');
-   $(this).addClass('filter-active1');
+  $('#description-flters1 li').on('click', function() {
+    $("#description-flters1 li").removeClass('filter-active1');
+    $(this).addClass('filter-active1');
 
-   descriptionIsotope1.isotope({ filter: $(this).data('filter')});
- });
+    descriptionIsotope1.isotope({ filter: $(this).data('filter')});
+  });
+
+  var descriptionIsotope3 = $('.description-container3').isotope({
+    itemSelector: '.description-item3'
+  });
+
+  $('#description-flters3 li').on('click', function() {
+    $("#description-flters3 li").removeClass('filter-active3');
+    $(this).addClass('filter-active3');
+
+    descriptionIsotope3.isotope({ filter: $(this).data('filter')});
+  });
 
   // для контейнера <div class="container" data-aos="fade-up"> 3
   var descriptionIsotope2 = $('.description-container2').isotope({

@@ -122,7 +122,7 @@
             <td><input id="item-price-name-{{ $loop->index }}" type="text" name="price-room-name" value="{{ $room->name }}" class="form-control panel-input-room" placeholder=""></td>
             <td class="panel-col"><input id="item-price-price-{{ $loop->index }}" type="text" name="price-room-price" value="{{ $room->price }}" class="form-control panel-input-room" placeholder=""></td>
             <td><textarea id="item-price-discription-{{ $loop->index }}" type="text" name="price-room-discription"  class="form-control panel-input-room" placeholder="">{{ $room->description }}</textarea></td>
-            <td class="panel-col"><input id="item-price-type-{{$loop->index }}" type="text" name="price-room-type" value="{{ $room->type }}" class="form-control panel-input-room" placeholder=""></td>
+            <td class="panel-col"><p id="item-price-type-{{$loop->index }}" class="panel-input-room">{{ $room->type }}</p></td>
           </tr>
         @endforeach
       </tbody>

@@ -124,6 +124,11 @@ body, html {
   .carousel-description{
     font-size: 20px !important;
   }
+  #carouselRooms{
+    border-radius: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
 }
 @media (max-width: 1000px) {
   .carousel-caption .display-2{
@@ -133,14 +138,11 @@ body, html {
     position:relative;
     top: 40% !important;
   }
-
+  .carousel-item img{
+    width:240%;
+    height: 110%;
+  }
 }
-
-/* .nav-link{
-  text-decoration: underline;
-  color: #333 !important;
-  text-shadow: 1px 1px 10px #00faf0 !important;
-} */
 
 /* шаблон home стили для него */
 
@@ -377,8 +379,6 @@ section {
 @media (max-width: 1200px) {
   #carouselRooms{
     height: 500px;
-    padding-left: 10px;
-    padding-right: 10px;
   }
 }
 
@@ -508,8 +508,9 @@ a:focus, a:active, a:visited {
 .description .description-all-item,
 .description .description-item,
 .description .description-item1,
-.description .description-item2 {
-  margin-bottom: 30px;
+.description .description-item2,
+.description .description-item3 {
+  margin-bottom: 20px;
   font-weight: 700;
   color: #333;
 }
@@ -545,11 +546,18 @@ a:focus, a:active, a:visited {
   list-style: none;
   text-align: center;
 }
+.description #description-flters3 {
+  padding: 0;
+  margin: 0 auto 20px auto;
+  list-style: none;
+  text-align: center;
+}
 
 .description #description-flters-all li,
 .description #description-flters li,
 .description #description-flters1 li,
-.description #description-flters2 li {
+.description #description-flters2 li,
+.description #description-flters3 li {
   cursor: pointer;
   display: inline-block;
   padding: 8px 16px 10px 16px;
@@ -567,11 +575,13 @@ a:focus, a:active, a:visited {
 .description #description-flters li:hover,
 .description #description-flters1 li:hover,
 .description #description-flters2 li:hover,
+.description #description-flters3 li:hover,
 .description #description-flters-all li:hover,
 .description #description-flters-all li.filter-all-active,
 .description #description-flters li.filter-active,
 .description #description-flters1 li.filter-active1,
-.description #description-flters2 li.filter-active2 {
+.description #description-flters2 li.filter-active2,
+.description #description-flters3 li.filter-active3 {
   color: #fff;
   background: #79B9DD;
 }
@@ -579,7 +589,8 @@ a:focus, a:active, a:visited {
 .description #description-flters-all li:last-child,
 .description #description-flters li:last-child,
 .description #description-flters1 li:last-child,
-.description #description-flters2 li:last-child {
+.description #description-flters2 li:last-child,
+.description #description-flters3 li:last-child {
   margin-right: 0;
 }
 
